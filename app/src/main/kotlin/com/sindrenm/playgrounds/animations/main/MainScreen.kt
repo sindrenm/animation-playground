@@ -1,5 +1,9 @@
 package com.sindrenm.playgrounds.animations.main
 
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.LocalActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +22,15 @@ import com.sindrenm.playgrounds.animations.main.animations.backgrounds.FallingSn
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun MainScreen() {
+  val activity = LocalActivity.current as? ComponentActivity
+
+  LaunchedEffect(activity) {
+    activity?.enableEdgeToEdge(
+      statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+      navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+    )
+  }
+
   Scaffold(
     containerColor = Color.Black,
     topBar = {
