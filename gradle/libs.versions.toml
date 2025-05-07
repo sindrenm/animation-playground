@@ -1,0 +1,56 @@
+[versions]
+android-gradle-plugin = "8.10.0"
+androidx-activity = "1.10.1"
+androidx-hilt = "1.2.0"
+androidx-lifecycle = "2.9.0"
+androidx-navigation = "2.8.9"
+arrow = "2.1.1"
+dagger = "2.56.2"
+dagger-auto = "2.0.0"
+kotlin = "2.1.20"
+kotlinx-coroutines = "1.10.2"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+convention-application = { id = "convention.application" }
+convention-library-android = { id = "convention.library-android" }
+convention-library-jvm = { id = "convention.library-jvm" }
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.require = "2.1.20-2.0.1" }
+
+[libraries]
+android-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-compose-animation = { module = "androidx.compose.animation:animation" }
+androidx-compose-bom = "androidx.compose:compose-bom-alpha:2025.05.00"
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-core" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-core = "androidx.core:core-ktx:1.16.0"
+androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "androidx-hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt" }
+androidx-lifecycle-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewModel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+arrow-optics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
+arrow-optics-ksp = { module = "io.arrow-kt:arrow-optics-ksp-plugin", version.ref = "arrow" }
+coil-compose = "io.coil-kt:coil-compose:2.7.0"
+dagger-auto-android = { module = "se.ansman.dagger.auto:android", version.ref = "dagger-auto" }
+dagger-auto-compiler = { module = "se.ansman.dagger.auto:compiler", version.ref = "dagger-auto" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+dagger-hilt-runtime = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+google-material = "com.google.android.material:material:1.12.0"
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
