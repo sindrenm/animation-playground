@@ -1,14 +1,19 @@
 package com.sindrenm.playgrounds.animations.main.animations.backgrounds
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.sp
 import com.sindrenm.playgrounds.animations.main.Snowflake
 import com.sindrenm.playgrounds.animations.main.debug
 import kotlinx.coroutines.delay
@@ -22,14 +27,14 @@ fun FallingSnow(modifier: Modifier = Modifier) {
 
   val snowflakes = remember {
     List(50) {
-      Snowflake(
-        x = Random.nextDouble(0.0, windowIntSize.width.toDouble()).toFloat(),
-        y = Random.nextDouble(0.0, windowIntSize.height.toDouble()).toFloat(),
-      )
+      Snowflake(windowIntSize)
     }
   }
 
-  LaunchedEffect(windowIntSize) { // Or use a key that changes if you want to restart based on some param
+  val fontSize = 40.sp
+  val fontSizePx = with(LocalDensity.current) { fontSize.roundToPx() }
+
+  LaunchedEffect(windowIntSize) {
     debug("windowIntSize: $windowIntSize")
 
     while (isActive) {
@@ -37,13 +42,10 @@ fun FallingSnow(modifier: Modifier = Modifier) {
         var newY = snowflake.y + snowflake.speed
         var newX = snowflake.x + snowflake.drift
 
-        debug("newY: $newY")
-        debug("newX: $newX")
-
         // Recycle snowflake if it goes off screen
-        if (newY > windowIntSize.height + snowflake.radius * 2) {
-          newY = -snowflake.radius * 2 // Reset to top
-          newX = Random.nextFloat() * windowIntSize.width // New random X
+        if (newY > windowIntSize.height + fontSizePx) {
+          newY = -fontSizePx.toFloat()
+          newX = Random.nextDouble(0.0, windowIntSize.width.toDouble()).toFloat()
 
           snowflake.x = newX
           snowflake.y = newY
@@ -59,19 +61,24 @@ fun FallingSnow(modifier: Modifier = Modifier) {
     }
   }
 
+  val textMeasurer = rememberTextMeasurer()
+  val baseTextStyle = LocalTextStyle.current
+  val textLayoutResult = textMeasurer.measure("❄", style = baseTextStyle.copy(fontSize = fontSize))
+
   Canvas(modifier) {
     snowflakes.forEach { snowflake ->
-      drawSnowFlake(snowflake)
+      drawSnowFlake(snowflake, textLayoutResult)
     }
   }
 }
 
-private fun DrawScope.drawSnowFlake(snowflake: Snowflake) {
+private fun DrawScope.drawSnowFlake(snowflake: Snowflake, textLayoutResult: TextLayoutResult) {
+  val radius = textLayoutResult.size / 2
+  val topLeft = Offset(x = snowflake.x - radius.width, y = snowflake.y - radius.height)
 
-  drawCircle(
-    center = Offset(x = snowflake.x, y = snowflake.y),
-    color = snowflake.color,
-    radius = snowflake.radius.dp.toPx(),
+  drawText(
+    textLayoutResult = textLayoutResult,
+    topLeft = topLeft,
   )
 
   debug("Drawing snowflake at ${Offset(x = snowflake.x, y = snowflake.y)}")
