@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.sindrenm.playgrounds.animations.core.theme.AnimationsPlaygroundTheme
-import com.sindrenm.playgrounds.animations.main.animations.backgrounds.FallingSnow
+import com.sindrenm.playgrounds.animations.main.animations.backgrounds.FloatingEmojis
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +50,7 @@ internal fun MainScreen() {
     },
   ) { contentPadding ->
     Box(Modifier.fillMaxSize()) {
-      FallingSnow(Modifier.fillMaxSize())
+      FloatingEmojis(listOf("❄", "🌈", "💙", "🌴"), Modifier.fillMaxSize())
 
       ScreenContent(contentPadding)
     }
